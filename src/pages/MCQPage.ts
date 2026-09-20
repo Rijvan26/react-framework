@@ -72,7 +72,25 @@ import { useState } from "../core/UseState";
     });
 }
 
+
+private calculateScore(): number {
+    let score = 0;
+
+    for (const answer of this.answers) {
+        const question = this.questions[answer.questionIndex];
+
+        if (answer.selectedOption === question.correctAnswer) {
+            score++;
+        }
+    }
+console.log(score)
+
+    return score;
+}
+
+
     render(): string {
+        this._injectStyle()
         const progress = (this.currentQuestion / this.totalQuestions) * 100;
         const question = this.questions[this.currentQuestion - 1];
         return `
@@ -91,9 +109,52 @@ import { useState } from "../core/UseState";
 
     style(): string {
         return `
-        .mcq-page:{
-        backgroundColour:red;
-        }`
+     html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mcq-page {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  padding: 22px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+  background: #f5f6ff;
+}
+
+.mcq-page h1 {
+  margin: 0;
+  color: #10223e;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.mcq-page h3 {
+  margin: 0 0 8px;
+  color: #5f6475;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.mcq-page .progress-parent {
+  flex-shrink: 0;
+}
+
+.mcq-page .quiz-card {
+  flex: 1;
+  min-height: 0;
+}
+  
+`
     }
 
     override onPageReady(): void {
@@ -126,6 +187,12 @@ const isCorrect =
 console.log("Is correct:", isCorrect);
     console.log("Quiz finished");
     console.log("Answers:", this.answers);
+
+    const score = this.calculateScore();
+
+this.owner.emit("quizFinished", {
+    score,
+});
 
         return;
     }

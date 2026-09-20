@@ -64,7 +64,8 @@ export class Card extends Component {
         return `
 .quiz-card {
   display: flex;
-  min-height: 624px;
+  height: 100%;
+  min-height: 0;
   flex-direction: column;
   padding: 40px;
   border-radius: 12px;
@@ -130,6 +131,8 @@ export class Card extends Component {
   display: flex;
   justify-content: flex-end;
   margin-top: auto;
+  padding-top: 32px;
+  flex-shrink: 0;
 }
   .quiz-next {
   width: 184px;

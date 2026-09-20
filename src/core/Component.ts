@@ -81,7 +81,7 @@ export abstract class Component {
     document.head.appendChild(this._styleTag);
   }
 
-  protected emit(eventName: string, detail?: unknown): void { //emit() is a helper that makes dispatching custom events easier, but it requires the Component to have a valid _element.
+   emit(eventName: string, detail?: unknown): void { //emit() is a helper that makes dispatching custom events easier, but it requires the Component to have a valid _element.
   if (!this._element) return;
 
   this._element.dispatchEvent(

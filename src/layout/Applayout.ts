@@ -20,11 +20,11 @@ type RouteType =
 
 export class AppLayout extends Page {
   private route = useState<RouteType>("HomePage", this);
-
+public score = 0;
   private pages: Page[] = [
     new HomePage(),
     new MCQPage(this),
-    new ReviewPage(),
+    new ReviewPage(this),
     new NotFound(),
   ];
 
@@ -70,6 +70,15 @@ override onPageReady(): void {
 
     this.route.set(routeName);
   });
+
+  appLayoutElement?.addEventListener("quizFinished", (event) => {
+  const customEvent = event as CustomEvent;
+
+  const score = customEvent.detail.score;
+         this.score = score
+         this.route.set("ReviewPage");
+  console.log("Score received in AppLayout:", score);
+});
 }
 
 override onUnmount(): void {

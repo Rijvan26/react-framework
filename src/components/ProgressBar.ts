@@ -17,7 +17,7 @@ export class ProgressBar extends Component{
         this._injectStyle()
         return `
          <div class="progress-parent">
-                <div class="progress"></div>
+                <div class="progress" style="width: ${this.props.percent}%"></div>
             </div>
         `
     }

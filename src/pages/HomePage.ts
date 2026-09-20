@@ -49,20 +49,23 @@ export class HomePage extends Page {
 
   style(): string {
     return `
+        html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
       .home-page, .home-page * { box-sizing: border-box; }
-
-      .home-page {
-        position: relative;
-        display: grid;
-        min-height: 100vh;
-        overflow: hidden;
-        place-items: center;
-        padding: 48px 24px;
-        background: #f8f8ff;
-        color: #10233e;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        isolation: isolate;
-      }
+.home-page {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden;
+  place-items: center;
+  padding: 24px;
 
       .home-page__glow {
         position: absolute;
@@ -89,10 +92,17 @@ export class HomePage extends Page {
       .welcome__mark {
         position: relative;
         width: 252px;
-        height: 278px;
-        margin-bottom: 48px;
+        height: 250px;
+        margin-bottom: 28px;
       }
 
+      .welcome__actions {
+  display: flex;
+  width: min(100%, 376px);
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: 40px;
+}
       .welcome__disc {
         position: absolute;
         top: 20px;
